@@ -1,6 +1,6 @@
 import java.util.Scanner;
  
-public class Task3Variant2 {
+public class Task3 {
     public static double findMax(double a, double b) {
         if (a > b) {
             return a;
