@@ -6,7 +6,7 @@ public class Task4 {
         double area = (Math.sqrt(3) / 4) * Math.pow(x, 2);
 
         System.out.println("Периметр: " + perimeter);
-        System.out.println("Площадь: " + area);
+        System.out.printf("Площадь: %.2f", area);
     }
 
     public static void main(String[] args) {
