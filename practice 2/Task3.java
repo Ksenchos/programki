@@ -8,8 +8,8 @@ public class Task3 {
         int n = scanner.nextInt();
 
         while (n > 0) {
-            int lasrDigit = n % 10;
-            System.out.println(lasrDigit);
+            int lastDigit = n % 10;
+            System.out.println(lastDigit);
 
             n = n / 10;
         }
