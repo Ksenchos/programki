@@ -1,0 +1,163 @@
+import java.util.Objects;
+
+public class Task {
+    public static void main(String[] args) {
+        Employer[] staff = {
+                new Developer("Иванов Иван Иванович", 150000, 2020, "Высшее", "Java"),
+                new Developer("Мартынов Антон Львович", 20000, 2015, "Высшее", "Python"),
+
+                new Teacher("Петров Петр Петрович", 80000, 2015, "Высшее", "Программирование"),
+                new Teacher("Смирнова Софья Сергеевна", 50000, 2023, "Высшее", "Экономика"),
+
+                new Manager("Пупкин Василий Александрович", 100000, 2018, "MBA", "Отдел продаж"),
+                new Manager("Соколовская Кристина Михайловна", 150000, 2011, "MBA", "Отдел маркетинга")
+        };
+
+        double totalBonus = 0;
+        for (Employer e: staff) {
+            System.out.println(e);
+
+            double bonus = e.calculateBonus();
+            System.out.println("Бонус: " + bonus + "руб.\n");
+
+            totalBonus += bonus;
+        }
+
+        System.out.println("Суммарный бонус всей компании: " + totalBonus + "руб.");
+        System.out.println("Количество сотрудников: " + staff.length);
+        System.out.printf("Средний бонус на сотрудника: %.2f руб.", totalBonus / staff.length);
+    }
+}
+
+class Employer {
+    private String fullName;
+    private double salary;
+    private int hireYear;
+    private String education;
+
+    public Employer(String fullName, double salary, int hireYear, String education) {
+        this.fullName = fullName;
+        this.salary = salary;
+        this.hireYear = hireYear;
+        this.education = education;
+    }
+
+    public double getSalary() { return salary; }
+
+    public int calculateExperience() {
+        return 2026 - hireYear;
+    }
+
+    public double calculateBonus() {
+        return (salary * 0.1) + (calculateExperience() * 1000);
+    }
+
+    public String getInfo() {
+        return "ФИО: " + fullName + ", Стаж: " + calculateExperience() + " лет";
+    }
+
+    public String toString() {
+        return "Employer{" + "fullName='" + fullName + '\'' + ", salary=" + salary + ", hireYear=" + hireYear + ", education='" + education + '\'' + '}';
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employer employer = (Employer) o;
+        return Double.compare(employer.salary, salary) == 0 && hireYear == employer.hireYear && Objects.equals(fullName, employer.fullName) && Objects.equals(education, employer.education);
+    }
+
+    public int hashCode() {
+        return Objects.hash(fullName, salary, hireYear, education);
+    }
+}
+
+
+class Developer extends Employer {
+    private String programmingLanguage;
+
+    public Developer(String fullName, double salary, int hireYear, String education, String programmingLanguage) {
+        super(fullName, salary, hireYear, education);
+        this.programmingLanguage = programmingLanguage;
+    }
+
+    public double calculateBonus() {
+        return super.calculateBonus() + 5000;
+    }
+
+    public String toString() {
+        return super.toString() + ", Developer{language='" + programmingLanguage + "'}";
+    }
+
+    public boolean equals(Object o) {
+        if (!super.equals(o)) return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Developer developer = (Developer) o;
+        return Objects.equals(programmingLanguage, developer.programmingLanguage);
+    }
+
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), programmingLanguage);
+    }
+}
+
+
+class Teacher extends Employer {
+    private String subject;
+
+    public Teacher(String fullName, double salary, int hireYear, String education, String subject) {
+        super(fullName, salary, hireYear, education);
+        this.subject = subject;
+    }
+
+    public double calculateBonus() {
+        return super.calculateBonus() + (calculateExperience() * 2000);
+    }
+
+    public String toString() {
+        return super.toString() + ", Teacher{subject='" + subject + "'}";
+    }
+
+    public boolean equals(Object o) {
+        if (!super.equals(o)) return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Teacher teacher = (Teacher) o;
+        return Objects.equals(subject, teacher.subject);
+    }
+
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), subject);
+    }
+}
+
+
+class Manager extends Employer {
+    private String department;
+
+    public Manager(String fullName, double salary, int hireYear, String education, String department) {
+        super(fullName, salary, hireYear, education);
+        this.department = department;
+    }
+
+    public double calculateBonus() {
+        return (getSalary() * 0.2) + super.calculateBonus();
+    }
+
+    public String toString() {
+        return super.toString() + ", Manager{department='" + department + "'}";
+    }
+
+    public boolean equals(Object o) {
+        if (!super.equals(o)) return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Manager manager = (Manager) o;
+        return Objects.equals(department, manager.department);
+    }
+
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), department);
+    }
+}
