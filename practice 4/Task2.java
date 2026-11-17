@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 
-public class Task {
+public class Task2 {
     public static void main(String[] args) {
         Developer dev = new Developer("Иванов Иван Иванович", 150000, 2020, "Высшее", "Java");
         Teacher teach = new Teacher("Петров Петр Петрович", 80000, 2015, "Высшее", "Программирование");
