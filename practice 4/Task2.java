@@ -1,7 +1,6 @@
 import java.util.Objects;
 
-
-public class Task2 {
+public class Task {
     public static void main(String[] args) {
         Developer dev = new Developer("Иванов Иван Иванович", 150000, 2020, "Высшее", "Java");
         Teacher teach = new Teacher("Петров Петр Петрович", 80000, 2015, "Высшее", "Программирование");
@@ -36,10 +35,7 @@ class Employer {
         this.education = education;
     }
 
-    public String getFullName() { return fullName; }
     public double getSalary() { return salary; }
-    public int getHireYear() { return hireYear; }
-    public String getEducation() { return education; }
 
     public int calculateExperience() {
         return 2026 - hireYear;
@@ -85,9 +81,9 @@ class Developer extends Employer {
     public String toString() {
         return super.toString() + ", Developer{language='" + programmingLanguage + "'}";
     }
-    @Override
+
     public boolean equals(Object o) {
-        if (!super.equals(o)) return false; // Сначала проверяем поля родителя
+        if (!super.equals(o)) return false;
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Developer developer = (Developer) o;
@@ -116,7 +112,6 @@ class Teacher extends Employer {
         return super.toString() + ", Teacher{subject='" + subject + "'}";
     }
 
-    @Override
     public boolean equals(Object o) {
         if (!super.equals(o)) return false;
         if (this == o) return true;
@@ -146,8 +141,7 @@ class Manager extends Employer {
     public String toString() {
         return super.toString() + ", Manager{department='" + department + "'}";
     }
-
-    @Override
+    
     public boolean equals(Object o) {
         if (!super.equals(o)) return false;
         if (this == o) return true;
