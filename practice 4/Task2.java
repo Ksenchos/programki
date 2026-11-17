@@ -1,7 +1,7 @@
 import java.util.Objects;
-import java.util.Scanner;
 
-public class Task2 {
+
+public class Task {
     public static void main(String[] args) {
         Developer dev = new Developer("Иванов Иван Иванович", 150000, 2020, "Высшее", "Java");
         Teacher teach = new Teacher("Петров Петр Петрович", 80000, 2015, "Высшее", "Программирование");
@@ -61,7 +61,7 @@ class Employer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employer employer = (Employer) o;
-        return Double.compare(employer.salary, salary) == 0 && hireYear == employer.hireYear && Objects.equals(fullName, employer.fullName) && Objects.hash(fullName, salary, hireYear, education);
+        return Double.compare(employer.salary, salary) == 0 && hireYear == employer.hireYear && Objects.equals(fullName, employer.fullName) && Objects.equals(education, employer.education);
     }
 
     public int hashCode() {
