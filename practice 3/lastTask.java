@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-public class lastTask {
+public class Task {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -74,7 +74,7 @@ public class lastTask {
         double[] distances = new double[count];
         System.out.println("Введите расстояния (в метрах):");
         for (int i = 0; i < count; i++) {
-            distances[i] = getValidPositiveDouble("Объект " + (i + 1) + ": ");
+            distances[i] = getValidDouble("Объект " + (i + 1) + ": ", false);
         }
         return distances;
     }
@@ -83,7 +83,7 @@ public class lastTask {
         double[] times = new double[count];
         System.out.println("Введите время (в секундах):");
         for (int i = 0; i < count; i++) {
-            times[i] = getValidStrictlyPositiveDouble("Объект " + (i + 1) + ": ");
+            times[i] = getValidDouble("Объект " + (i + 1) + ": ", true);
         }
         return times;
     }
@@ -103,34 +103,17 @@ public class lastTask {
         }
     }
 
-    static double getValidPositiveDouble(String prompt) {
-        double value;
+    static double getValidDouble(String prompt, boolean strictlyPositive) {
         while (true) {
             System.out.print(prompt);
             try {
-                value = scanner.nextDouble();
-                if (value >= 0) {
-                    return value;
+                double value = scanner.nextDouble();
+                if (strictlyPositive && value <= 0) {
+                    System.out.println("Ошибка! Число должно быть строго больше нуля.");
+                } else if (!strictlyPositive && value < 0) {
+                    System.out.println("Ошибка! Число не может быть отрицательным.");
                 } else {
-                    System.out.println("Ошибка! Число не может быть отрицательным");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Ошибка! Введите корректное число");
-                scanner.nextLine();
-            }
-        }
-    }
-
-    static double getValidStrictlyPositiveDouble(String prompt) {
-        double value;
-        while (true) {
-            System.out.print(prompt);
-            try {
-                value = scanner.nextDouble();
-                if (value > 0) {
                     return value;
-                } else {
-                    System.out.println("Ошибка! Число должно быть больше нуля.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Ошибка! Введите корректное число.");
